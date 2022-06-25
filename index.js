@@ -9,16 +9,17 @@ const path = require('path')
 const multer = require('multer')
 
 const UPLOADS = './uploads/'
-
+require('dotenv').config()
 app.use(cors());
 app.use(express.json())
 
 
-const CLIENT_ID = '920870880600-s7nl7jntc2k011gurm7q1pnr9v3e8irj.apps.googleusercontent.com' 
-const CLIENT_SECRET = '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'
+const CLIENT_ID = process.env.CLIENT_ID
+const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
 const REFRESH_TOKEN = '1//04bugOaS1kaivCgYIARAAGAQSNwF-L9IrmvraomCTzkSPmLnmfJMGm6P3dRyPMwzrFbBiSuEV4AXA3aodtYgvCUklSxiUo5y4Sf0'
 
+console.log(CLIENT_ID , CLIENT_SECRET)
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET, REDIRECT_URI )
 oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
@@ -87,7 +88,7 @@ var folder = './uploads/';
    
 fs.readdir(folder, (err, files) => {
   if (err) throw err;
-  
+   console.log('delete')
   for (const file of files) {
       fs.unlinkSync(folder+file);
   }
@@ -96,21 +97,20 @@ fs.readdir(folder, (err, files) => {
 }
 
 
+
 app.post('/contacts', uploads.array('attachment' , 5 ) , async(req,res , next)=>{
    const email = req.body.email;
    const name = req.body.name;
    const message = req.body.message;
-   console.log("a" ,email, name, message)
+  
    const filesname = req?.files[0]?.filename;
-   console.log(req)
+
    await sendMail({email , name , message , filesname })
    res.redirect('http://localhost:3000/contact')
    next();
 })
 
-app.get('/delete', async(req,res)=>{
-   deleteF()
-})
+
 
 app.get('/' , (req , res)=>{
    res.send('Teximco BD')
@@ -120,3 +120,19 @@ app.get('/' , (req , res)=>{
 app.listen(port , ()=>{
    console.log('teximco db ')
 })
+
+
+function start() {
+
+   setTimeout(function() {
+       console.log('Hello My Infinite Loop Execution2');
+
+     // Again
+     start();
+     deleteF()
+     // Every 3 sec
+   }, 86400000);
+}
+
+// Begins
+start();
