@@ -105,7 +105,7 @@ app.post('/contacts', uploads.array('attachment' , 5 ) , async(req,res , next)=>
    const filesname = req?.files[0]?.filename;
 
    await sendMail({email , name , message , filesname })
-   res.redirect('http://localhost:3000/contact')
+   res.redirect('https://teximcobd.com/contact')
    next();
 })
 
