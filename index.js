@@ -19,7 +19,6 @@ const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = 'https://developers.google.com/oauthplayground'
 const REFRESH_TOKEN = '1//04bugOaS1kaivCgYIARAAGAQSNwF-L9IrmvraomCTzkSPmLnmfJMGm6P3dRyPMwzrFbBiSuEV4AXA3aodtYgvCUklSxiUo5y4Sf0'
 
-console.log(CLIENT_ID , CLIENT_SECRET)
 
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET, REDIRECT_URI )
 oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
@@ -125,8 +124,7 @@ app.listen(port , ()=>{
 function start() {
 
    setTimeout(function() {
-       console.log('Hello My Infinite Loop Execution2');
-
+       
      // Again
      start();
      deleteF()
