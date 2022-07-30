@@ -40,7 +40,7 @@ async function sendMail({email, name , message , filesname }){
       })
        const mailOptions = {
          from : email, 
-         to : 'jehad0160@gmail.com',
+         to : 'mijan@teximcobd.com',
          replyTo : `${name} , ${email}`,
          subject : `New Message from ${name}` ,
          text : `This is Message`,
